@@ -41,6 +41,7 @@ codespell = "^2.2.5"  # Spell checking in code
 wheel = "^0.41.0"  # Build wheels
 twine = "^4.0.0"  # Publish packages
 pytest-runner = "^6.0.0"  # Running tests via `python setup.py test`
+bandit = "^1.8.0"  # Security check
 
 
 [tool.poetry.group.docs.dependencies]
