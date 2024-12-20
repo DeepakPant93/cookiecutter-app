@@ -7,8 +7,7 @@ repository = "https://github.com/DeepakPant93/cookiecutter-app"
 documentation = "https://DeepakPant93.github.io/cookiecutter-app/"
 readme = "README.md"
 packages = [
-  {include = "cookiecutter_app"}
-]
+  {include = "cookiecutter_app"}]
 
 [tool.poetry.scripts]
 cookiecutter_app = "cookiecutter_app.main:main"
@@ -27,9 +26,8 @@ fastapi-health = "^0.4.0"  # Health check for FastAPI
 #pydantic = "^2.0.0"  # Data validation and settings management
 
 
-
 [tool.poetry.group.dev.dependencies]
-deptry = "^0.16.2"  # For dependency management
+deptry = "^0.16.2"  # Dependency management
 mypy = "^1.5.1"  # Static type checking
 pre-commit = "^3.4.0"  # Pre-commit hooks
 tox = "^4.11.1"  # Testing in multiple environments
@@ -42,7 +40,9 @@ wheel = "^0.41.0"  # Build wheels
 twine = "^4.0.0"  # Publish packages
 pytest-runner = "^6.0.0"  # Running tests via `python setup.py test`
 bandit = "^1.8.0"  # Security check
-
+pylint = "^3.0.0"  # Powerful linter
+pydocstyle = "^6.3.0"  # Enforce PEP 257 docstring conventions
+isort = "^5.12.0"  # Sort imports
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.5.0"  # Documentation site generator
@@ -98,8 +98,8 @@ module = [
     "joblib.*",
     "yaml.*",
     "ensure.*",
-    "cookiecutter_app.main"
-]
+    "fastapi_health.*",
+    "cookiecutter_app.main"]
 ignore_missing_imports = true
 ignore_errors = true
 
@@ -112,9 +112,7 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 filterwarnings = [
     "ignore:.*general_plain_validator_function.*:DeprecationWarning",
-    "ignore:.*with_info_plain_validator_function.*:DeprecationWarning"
-]
-
+    "ignore:.*with_info_plain_validator_function.*:DeprecationWarning"]
 
 [tool.ruff]
 target-version = "py39"
@@ -150,16 +148,14 @@ select = [
     # ruff
     "RUF",
     # tryceratops
-    "TRY",
-]
+    "TRY",]
 ignore = [
     # LineTooLong
     "E501",
     # DoNotAssignLambda
     "E731",
     # Possible binding to all interfaces - Require for Docker container
-    "S104"
-]
+    "S104"]
 
 [tool.ruff.format]
 preview = true
@@ -181,8 +177,7 @@ omit = [
     "cookiecutter_app/logger/*",  # Exclude all files in a logger folder
     "cookiecutter_app/entity/*",  # Exclude all files in entity folder
     "cookiecutter_app/config/*",  # Exclude all files in config folder
-    "cookiecutter_app/models/*",  # Exclude all files in model folder
-]
+    "cookiecutter_app/models/*",]  # Exclude all files in model folder
 
 [tool.ruff.per-file-ignores]
 "tests/*" = ["S101"]
@@ -191,16 +186,12 @@ omit = [
 current_version = "0.0.1"
 commit = true
 tag = true
-
-[[tool.bumpversion.files]]
-glob = "pyproject.toml"
-search = 'version = "{current_version}"'
-replace = 'version = "{new_version}"'
-
-[[tool.bumpversion.files]]
-glob = "cookiecutter_app/main.py"
-search = '__version__ = "{current_version}"'
-replace = '__version__ = "{new_version}"'
+files = [
+    { glob = "pyproject.toml", search = 'version = "{current_version}"', replace = 'version = "{new_version}"' },
+    { glob = "cookiecutter_app/main.py", search = '__version__ = "{current_version}"', replace = '__version__ = "{new_version}"' }]
 
 [tool.deptry]
 exclude = ["research", "tests", "docs", ".venv", "venv", "__pycache__", ".ruff_cache", ".pytest_cache", ".mypy_cache", ".coverage", ".git", "build", "dist", ".github", "site", "config"]
+
+[tool.pydocstyle]
+select = ["D101", "D102"]
